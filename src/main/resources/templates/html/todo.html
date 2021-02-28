@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <title>MyToDooo</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="header">MyToDooo</div>
+      <div class="body">
+        <div class="todos" id="app">
+          <div>
+            <div class="left save-ok">{{ saveOK }}</div>
+            <div class="save-button right" v-on:click="postTodos">save</div>
+            <div class="clear"></div>
+          </div>
+          <div class="todo-list">
+            <div v-for="(todo, i) in todos" class="todo">
+              <div
+                v-on:click="complete(todo)"
+                v-bind:class="[todo.completed ? 'complete-button-completed' : 'complete-button']"
+              ></div>
+              <div
+                v-bind:class="[todo.completed ? 'todo-content-completed' : 'todo-content']"
+              >
+                <input
+                  type="text"
+                  placeholder="Todoを書こう"
+                  v-model="todo.todo"
+                  v-on:change="addTodo(i)"
+                />
+              </div>
+              <div class="clear"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      var addTodo = (app, index) => {
+        if (
+          index !== 0 ||
+          (app.todos.length >= 1 && app.todos[index].todo === "")
+        ) {
+          return;
+        }
+        app.todos.unshift({
+          completed: false,
+          todo: "",
+          todoKey: {
+            userId: app.username,
+            no: -1,
+          },
+        });
+      };
+
+      var getTodos = (app) => {
+        axios
+          .get("/api/todos/" + app.username)
+          .then((resoponse) => {
+            app.todos = resoponse.data;
+            addTodo(app, 0);
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("初期化に失敗しました。");
+          });
+      };
+
+      var postTodos = (app) => {
+        axios
+          .post("/api/todos/" + app.username, app.todos)
+          .then((resoponse) => (app.saveOK = "保存しました。"))
+          .catch((err) => {
+            console.log(err);
+            app.saveOK = "保存に失敗。リトライしてください。";
+          })
+          .finally(() => {
+            setTimeout(() => {
+              app.saveOK = "";
+            }, 3000);
+          });
+      };
+
+      var complete = (todo) => {
+        todo.completed = !todo.completed;
+      };
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          username: "guest", // ログイン機能導入までは guest 固定
+          saveOK: "",
+          todos: [],
+        },
+        methods: {
+          complete: function (todo) {
+            complete(todo);
+          },
+          addTodo: function (index) {
+            addTodo(this, index);
+          },
+          postTodos: function () {
+            postTodos(this);
+          },
+        },
+        mounted() {
+          getTodos(this);
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+spring.jpa.hibernate.ddl-auto=none
+spring.datasource.url=jdbc:mariadb://xxx.xxx.xxx.xxx:3306/xxxxxxxx
+spring.datasource.username=xxxxxxxx
+spring.datasource.password=xxxxxxxx

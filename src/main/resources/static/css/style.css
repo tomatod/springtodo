@@ -1,0 +1,155 @@
+@font-face {
+  font-family: "TW";
+  src: url("./IndieFlower-Regular.ttf");
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #a2d5f2;
+  font-family: "Arial";
+  color: #111111;
+}
+
+.div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.header {
+  font-family: "TW";
+  color: #fafafa;
+  background-color: #07689f;
+  font-size: 2em;
+  padding: 3px 8px;
+}
+
+.body {
+  margin: 0px auto;
+  padding: 4px;
+  max-width: 980px;
+}
+
+.todos {
+  background-color: #fafafa;
+  margin: 10px 5px;
+  padding: 10px 6px;
+  border-radius: 8px;
+  border-width: 0px;
+}
+
+.todo {
+  animation: SlideInTodo 1s;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0px;
+}
+
+.complete-button {
+  border-radius: 50%;
+  background-color: #07689f;
+  height: 1em;
+  width: 1em;
+  margin-right: 8px;
+}
+
+.complete-button-completed {
+  border-radius: 50%;
+  background-color: #ff7e67;
+  height: 1em;
+  width: 1em;
+  margin-right: 8px;
+}
+
+.todo-content {
+  vertical-align: middle;
+  display: -webkit-flex;
+  display: flex;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 90%;
+}
+
+.todo-content-completed {
+  vertical-align: middle;
+  display: -webkit-flex;
+  display: flex;
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 90%;
+}
+
+.todo-content input[type="text"] {
+  border-color: #fafafa;
+  border-style: solid;
+  border-bottom-color: #eeeeee;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.todo-content-completed input[type="text"] {
+  color: #555555;
+  border-color: #fafafa;
+  border-style: solid;
+  border-bottom-color: #eeeeee;
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-decoration: line-through;
+}
+
+@keyframes SlideInTodo {
+  0% {
+    opacity: 0; /*初期状態では透明に*/
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.save-ok {
+  padding: 4px;
+  color: #555555;
+  font-size: 0.8em;
+}
+
+.save-button {
+  background-color: #ff7e67;
+  width: 2.8em;
+  height: 2.8em;
+  font-size: 0.8em;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center; /* 横方向中央揃え */
+  border-radius: 50%;
+  color: #fafafa;
+  right: 5px;
+  top: 5px;
+  user-select: none;
+}
+
+.save-button:hover {
+  color: #111111;
+}
