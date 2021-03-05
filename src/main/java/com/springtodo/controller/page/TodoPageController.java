@@ -6,12 +6,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping(path="/page")
 public class TodoPageController {
 
-    @RequestMapping(path="/todo", method=RequestMethod.GET)
+    @RequestMapping(path="/page/todo", method=RequestMethod.GET)
     public String TodoPage(Model model) {
         return "html/todo";
+    }
+
+    @RequestMapping(path="/", method=RequestMethod.GET)
+    public String RedirectTodoPage(Model model) {
+        return "redirect:/page/todo";
     }
 
 }

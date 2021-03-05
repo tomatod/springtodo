@@ -19,7 +19,7 @@
       <div class="body">
         <div th:if="${param.error}">パスワードが間違っています。</div>
         <div th:if="${param.logout}">ログアウトしました。</div>
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/page/login}" method="post">
           <div>
             <label> User Name : <input type="text" name="username" /> </label>
           </div>
